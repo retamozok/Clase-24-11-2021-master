@@ -1,0 +1,47 @@
+{{>nav}}
+
+<h1 class="titulo-h1 m-1">Creador de Productos: Mercado Online</h1>
+
+
+<div class="row justify-content-around m-3 div-creador">
+
+ <form action="/editproductos" method="post" enctype="multipart/form-data">
+    <input placeholder="Ingresar Nombre" type="text" name="nombre" required>
+    <input placeholder="ingrese Descripcion" type="" name="descripcion" required>
+    <input placeholder="Ingresar Precio" type="number" name="precio" required>
+    <input placeholder="Ingresar Stock" type="number" name="stock" required>
+    <input type="file" name="url" accept="image/x-png,image/gif,image/jpeg" required>
+    <button type="submit">Crear Producto</button>
+
+ </form>
+
+</div>
+
+<div class="row justify-content-around">
+
+  {{#each listadoProductos}}
+   
+    <div class="col-5 col-sm-3 select-producto m-2 ms-0">
+      <img src="./img/products/{{url}}" class="card-img-top" alt="">
+       
+  <form action="/editproductos?_method=PUT" method="post">
+   <input type="hidden" name="id" value={{id}}>
+    <h5 class="titulo-producto">{{nombre}}</h5>
+      <input name="nombre" placeholder={{nombre}}>
+    <h6>Precio: {{precio}}</h6>
+      <input name="precio" placeholder={{precio}}>
+    <h6>Cantidad de Stock: {{stock}}</h6>
+      <input name="stock" placeholder={{stock}}>
+      <input name="descripcion" placeholder={{descripcion}}>
+   <button type="submit">Actualizar</button>
+  </form>
+      
+   <form action="/editproductos?_method=DELETE" method="post">
+    <input type="hidden" name="id" value={{id}}>
+     <button type="submit">Borrar</button>
+   </form>
+   
+  </div> 
+  
+ {{/each}}
+ </div>
